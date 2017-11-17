@@ -31,13 +31,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
 
     private ArrayAdapter<?> genericListAdapter;
     private ArrayList<BluetoothDevice> deviceArrayList;
-    private ArrayList<BluetoothGattCharacteristic> gattCharacList;
     private ListView deviceListView;
     private BluetoothGattCallback miBandGattCallBack;
 
@@ -52,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initialiseViews() {
         deviceListView = (ListView) findViewById(R.id.deviceListView);
-        gattCharacList = new ArrayList<BluetoothGattCharacteristic>();
-        genericListAdapter = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_list_item_1,gattCharacList);
-
         miBandGattCallBack = new BluetoothGattCallback() {
             @Override
             public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
@@ -73,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-                    gatt.
+
             }
 
             @Override
@@ -123,6 +120,12 @@ public class MainActivity extends AppCompatActivity {
                 connectDevice((BluetoothDevice) parent.getItemAtPosition(position));
             }
         });
+    }
+
+    private void enableNotifications(BluetoothGatt bluetoothGatt)
+    {
+        ArrayList<BluetoothGattDescriptor> bluetoothGattDescriptors = new ArrayList<>();
+        bluetoothGattDescriptors.add(bluetoothGatt.getService(UUIDs.HEART_RATE_SERVICE).getCharacteristic(UUIDs.HEART_RATE_DESCRIPTOR).getDescriptor(UUIDs.HEART_RATE_DESCRIPTOR));
     }
 
     private void getPermissions() {
