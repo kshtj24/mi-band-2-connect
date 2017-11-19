@@ -35,7 +35,6 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private ArrayAdapter<?> genericListAdapter;
     private ArrayList<BluetoothDevice> deviceArrayList;
     private ListView deviceListView;
@@ -70,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-
+                enableNotifications(gatt);
             }
 
             @Override
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-                super.onCharacteristicChanged(gatt, characteristic);
+                Toast.makeText(MainActivity.this, "HearRate is " + characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 1).toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -122,10 +121,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void enableNotifications(BluetoothGatt bluetoothGatt)
-    {
+    private void enableNotifications(BluetoothGatt bluetoothGatt) {
         ArrayList<BluetoothGattDescriptor> bluetoothGattDescriptors = new ArrayList<>();
-        bluetoothGattDescriptors.add(bluetoothGatt.getService(UUIDs.HEART_RATE_SERVICE).getCharacteristic(UUIDs.HEART_RATE_DESCRIPTOR).getDescriptor(UUIDs.HEART_RATE_DESCRIPTOR));
+        bluetoothGattDescriptors.add(bluetoothGatt.getService(UUIDs.HEART_RATE_SERVICE).getCharacteristic(UUIDs.HEART_RATE_MEASUREMENT_CHARACTERISTIC).getDescriptor(UUIDs.HEART_RATE_DESCRIPTOR));
+
+        for (BluetoothGattDescriptor descriptor : bluetoothGattDescriptors) {
+            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+            bluetoothGatt.writeDescriptor(descriptor);
+        }
     }
 
     private void getPermissions() {
@@ -163,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         searchProgress.show();
 
         deviceArrayList = new ArrayList<BluetoothDevice>();
-        genericListAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1,  deviceArrayList);
+        genericListAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, deviceArrayList);
         deviceListView.setAdapter(genericListAdapter);
 
 
@@ -202,6 +205,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 10000);
     }
-
 
 }
