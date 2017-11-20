@@ -69,7 +69,6 @@ public class GattClientMainActivity extends AppCompatActivity {
                     break;
                 }
             }
-
             @Override
             public void onServicesDiscovered(BluetoothGatt gatt, int status) {
                 enableNotifications(gatt);
