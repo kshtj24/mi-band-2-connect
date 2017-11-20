@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.saxena.kshitij.miband2connect.MainActivity">
+    tools:context="com.saxena.kshitij.miband2connect.GattClientMainActivity">
 
     <ListView
         android:id="@+id/deviceListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <Button
-        android:id="@+id/readHeartRate"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="@id/deviceListView"/>
+    <!--<Button-->
+        <!--android:id="@+id/readHeartRate"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_constraintBottom_toBottomOf="@id/deviceListView"/>-->
 </android.support.constraint.ConstraintLayout>
