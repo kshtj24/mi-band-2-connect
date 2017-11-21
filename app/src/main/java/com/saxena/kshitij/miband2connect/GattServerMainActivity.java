@@ -113,8 +113,8 @@ public class GattServerMainActivity extends AppCompatActivity {
     }
 
     private void addServices() {
-        bluetoothGattServer.addService(new BluetoothGattService(UUIDs.HEART_RATE_SERVICE, BluetoothGattService.SERVICE_TYPE_PRIMARY));
-        bluetoothGattServer.addService(new BluetoothGattService(UUIDs.CUSTOM_BATTERY_SERVICE,BluetoothGattService.SERVICE_TYPE_PRIMARY));
+        //bluetoothGattServer.addService(new BluetoothGattService(UUIDs.HEART_RATE_SERVICE, BluetoothGattService.SERVICE_TYPE_PRIMARY));
+       // bluetoothGattServer.addService(new BluetoothGattService(UUIDs.CUSTOM_BATTERY_SERVICE,BluetoothGattService.SERVICE_TYPE_PRIMARY));
     }
 
     private void getPermissions() {

@@ -14,6 +14,8 @@ import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Region;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,6 +44,8 @@ public class GattClientMainActivity extends AppCompatActivity {
     private ArrayList<BluetoothDevice> deviceArrayList;
     private ListView deviceListView;
     private BluetoothGattCallback miBandGattCallBack;
+    private BluetoothGatt bluetoothGatt;
+    private BluetoothGattService variableService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +56,153 @@ public class GattClientMainActivity extends AppCompatActivity {
         enableBTAndDiscover();
     }
 
+    @Override
+    protected void onDestroy() {
+        bluetoothGatt.disconnect();
+        super.onDestroy();
+    }
+
+    /*------Methods to deal with the device services and data------*/
+    //authorising the selected Mi Band after the services are discovered
+    private void authoriseMiBand() {
+        BluetoothGattService service = bluetoothGatt.getService(UUIDs.CUSTOM_SERVICE_FEE1);
+
+
+        BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUIDs.CUSTOM_SERVICE_AUTH_CHARACTERISTIC);
+        bluetoothGatt.setCharacteristicNotification(characteristic, true);
+        for (BluetoothGattDescriptor descriptor : characteristic.getDescriptors()) {
+            if (descriptor.getUuid().equals(UUIDs.CUSTOM_SERVICE_AUTH_DESCRIPTOR)) {
+                Log.i("INFO", "Found NOTIFICATION BluetoothGattDescriptor: " + descriptor.getUuid().toString());
+                descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+            }
+        }
+
+        characteristic.setValue(new byte[]{0x01, 0x8, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x40, 0x41, 0x42, 0x43, 0x44, 0x45});
+        bluetoothGatt.writeCharacteristic(characteristic);
+    }
+
+    //getting the device details
+    private void getDeviceInformation() {
+        variableService = bluetoothGatt.getService(UUIDs.DEVICE_INFORMATION_SERVICE);
+        BluetoothGattCharacteristic deviceSerialNumber, deviceHardwareRevision, deviceSoftwareRevision;
+
+
+//        for (BluetoothGattCharacteristic characteristic : bluetoothGatt.getService(UUIDs.DEVICE_INFORMATION_SERVICE).getCharacteristics()) {
+//            bluetoothGatt.setCharacteristicNotification(characteristic, true);
+//            bluetoothGatt.readCharacteristic(characteristic);
+//        }
+        deviceSerialNumber = variableService.getCharacteristic(UUIDs.SERIAL_NUMBER);
+        deviceHardwareRevision = variableService.getCharacteristic(UUIDs.HARDWARE_REVISION_STRING);
+        deviceSoftwareRevision = variableService.getCharacteristic(UUIDs.SOFTWARE_REVISION_STRING);
+
+        bluetoothGatt.setCharacteristicNotification(deviceSerialNumber, true);
+        bluetoothGatt.readCharacteristic(deviceSerialNumber);
+
+        bluetoothGatt.setCharacteristicNotification(deviceHardwareRevision, true);
+        bluetoothGatt.readCharacteristic(deviceHardwareRevision);
+
+        bluetoothGatt.setCharacteristicNotification(deviceSoftwareRevision, true);
+        bluetoothGatt.readCharacteristic(deviceSoftwareRevision);
+    }
+
+    private void getHeartRate() {
+        variableService = bluetoothGatt.getService(UUIDs.HEART_RATE_SERVICE);
+        BluetoothGattCharacteristic heartRateCharacteristic = variableService.getCharacteristic(UUIDs.HEART_RATE_MEASUREMENT_CHARACTERISTIC);
+        BluetoothGattDescriptor heartRateDescriptor = heartRateCharacteristic.getDescriptor(UUIDs.HEART_RATE_MEASURMENT_DESCRIPTOR);
+
+        bluetoothGatt.setCharacteristicNotification(heartRateCharacteristic, true);
+        heartRateDescriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+        bluetoothGatt.writeDescriptor(heartRateDescriptor);
+
+    } //on characteristic changed method to be handled for this one
+
+
+    /*--------Connection and other basic methods---------*/
+    //getting permissions
+    private void getPermissions() {
+        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_DENIED) {
+                shouldShowRequestPermissionRationale("Please grant this app the following permissions to make it work properly");
+                requestPermissions(new String[]{Manifest.permission.BLUETOOTH_ADMIN, Manifest.permission.BLUETOOTH}, 1);
+            }
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission_group.LOCATION) == PackageManager.PERMISSION_DENIED) {
+                shouldShowRequestPermissionRationale("Please grand Location permission for scanning devices nearby");
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+
+        } else {
+            Toast.makeText(GattClientMainActivity.this, "This device doesn't support Bluetooth LE", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    //enable bluetooth if disabled and search the ble devices
+    private void enableBTAndDiscover() {
+        final BluetoothAdapter bluetoothAdapter = ((BluetoothManager) getSystemService(BLUETOOTH_SERVICE)).getAdapter();
+
+        final ProgressDialog searchProgress = new ProgressDialog(GattClientMainActivity.this);
+        searchProgress.setIndeterminate(true);
+        searchProgress.setTitle("BlueTooth LE Device");
+        searchProgress.setMessage("Searching...");
+        searchProgress.setCancelable(false);
+        searchProgress.show();
+
+        deviceArrayList = new ArrayList<BluetoothDevice>();
+        genericListAdapter = new ArrayAdapter<>(GattClientMainActivity.this, android.R.layout.simple_list_item_1, deviceArrayList);
+        deviceListView.setAdapter(genericListAdapter);
+
+
+        if (bluetoothAdapter == null) {
+            Toast.makeText(GattClientMainActivity.this, "Bluetooth not supported on this device", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (!bluetoothAdapter.isEnabled()) {
+            startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE), 1);
+
+        }
+        final ScanCallback leDeviceScanCallback = new ScanCallback() {
+            @Override
+            public void onScanResult(int callbackType, ScanResult result) {
+                Log.e("TAG", "Device found" + " " + result.getDevice().getAddress() + " " + result.getDevice().getName());
+                if (!deviceArrayList.contains(result.getDevice())) {
+                    deviceArrayList.add(result.getDevice());
+                    genericListAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onScanFailed(int errorCode) {
+                super.onScanFailed(errorCode);
+            }
+        };
+
+
+        bluetoothAdapter.getBluetoothLeScanner().startScan(leDeviceScanCallback);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                bluetoothAdapter.getBluetoothLeScanner().stopScan(leDeviceScanCallback);
+                searchProgress.dismiss();
+            }
+        }, 10000);
+    }
+
+    //connecting the device selected in the list view and initializing bluetooth gatt
+    private void connectDevice(BluetoothDevice miBand) {
+
+        if (miBand.getBondState() == BluetoothDevice.BOND_NONE) {
+            miBand.createBond();
+            Log.e("Bond", "Created with Device");
+        }
+
+        bluetoothGatt = miBand.connectGatt(getApplicationContext(), true, miBandGattCallBack);
+    }
+
+    //initializing the UI and other declared components
     private void initialiseViews() {
         deviceListView = (ListView) findViewById(R.id.deviceListView);
+        Button getBandDetails = (Button) findViewById(R.id.getBandDetails);
+
         miBandGattCallBack = new BluetoothGattCallback() {
             @Override
             public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
@@ -69,14 +219,16 @@ public class GattClientMainActivity extends AppCompatActivity {
                     break;
                 }
             }
+
             @Override
             public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-                enableNotifications(gatt);
+                authoriseMiBand();
             }
 
             @Override
             public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-
+                String value = characteristic.getValue().toString();
+                Log.e("TAG", "onCharacteristicRead: " + value + " UUID " + characteristic.getUuid().toString());
             }
 
             @Override
@@ -86,7 +238,6 @@ public class GattClientMainActivity extends AppCompatActivity {
 
             @Override
             public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-                //Toast.makeText(GattClientMainActivity.this, "Heart Rate " + characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 1), Toast.LENGTH_LONG).show();
                 byte[] value = characteristic.getValue();
                 if (value[0] == 0x10 && value[1] == 0x01 && value[2] == 0x01) {
                     characteristic.setValue(new byte[]{0x02, 0x8});
@@ -143,99 +294,13 @@ public class GattClientMainActivity extends AppCompatActivity {
                 connectDevice((BluetoothDevice) parent.getItemAtPosition(position));
             }
         });
-    }
 
-    private void enableNotifications(BluetoothGatt bluetoothGatt) {
-        BluetoothGattService service = bluetoothGatt.getService(UUID.fromString("0000fee1-0000-1000-8000-00805f9b34fb"));
-
-        BluetoothGattCharacteristic characteristic = service.getCharacteristic(UUID.fromString("00000009-0000-3512-2118-0009af100700"));
-        bluetoothGatt.setCharacteristicNotification(characteristic, true);
-        for (BluetoothGattDescriptor descriptor : characteristic.getDescriptors()) {
-            if (descriptor.getUuid().equals(UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"))) {
-                Log.i("INFO", "Found NOTIFICATION BluetoothGattDescriptor: " + descriptor.getUuid().toString());
-                descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-            }
-        }
-
-        characteristic.setValue(new byte[]{0x01, 0x8, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x40, 0x41, 0x42, 0x43, 0x44, 0x45});
-        bluetoothGatt.writeCharacteristic(characteristic);
-    }
-
-    private void getPermissions() {
-        if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_DENIED) {
-                shouldShowRequestPermissionRationale("Please grant this app the following permissions to make it work properly");
-                requestPermissions(new String[]{Manifest.permission.BLUETOOTH_ADMIN, Manifest.permission.BLUETOOTH}, 1);
-            }
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission_group.LOCATION) == PackageManager.PERMISSION_DENIED) {
-                shouldShowRequestPermissionRationale("Please grand Location permission for scanning devices nearby");
-                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }
-
-        } else {
-            Toast.makeText(GattClientMainActivity.this, "This device doesn't support Bluetooth LE", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void connectDevice(BluetoothDevice miBand) {
-
-        if (miBand.getBondState() == BluetoothDevice.BOND_NONE) {
-            miBand.createBond();
-            Log.e("Bond", "Created with Device");
-        }
-
-        miBand.connectGatt(getApplicationContext(), true, miBandGattCallBack);
-    }
-
-    private void enableBTAndDiscover() {
-        final BluetoothAdapter bluetoothAdapter = ((BluetoothManager) getSystemService(BLUETOOTH_SERVICE)).getAdapter();
-
-        final ProgressDialog searchProgress = new ProgressDialog(GattClientMainActivity.this);
-        searchProgress.setIndeterminate(true);
-        searchProgress.setTitle("BlueTooth LE Device");
-        searchProgress.setMessage("Searching...");
-        searchProgress.setCancelable(false);
-        searchProgress.show();
-
-        deviceArrayList = new ArrayList<BluetoothDevice>();
-        genericListAdapter = new ArrayAdapter<>(GattClientMainActivity.this, android.R.layout.simple_list_item_1, deviceArrayList);
-        deviceListView.setAdapter(genericListAdapter);
-
-
-        if (bluetoothAdapter == null) {
-            Toast.makeText(GattClientMainActivity.this, "Bluetooth not supported on this device", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if (!bluetoothAdapter.isEnabled()) {
-            startActivityForResult(new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE), 1);
-
-        }
-        final ScanCallback leDeviceScanCallback = new ScanCallback() {
+        getBandDetails.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onScanResult(int callbackType, ScanResult result) {
-                Log.e("TAG", "Device found" + " " + result.getDevice().getAddress() + " " + result.getDevice().getName());
-                if (!deviceArrayList.contains(result.getDevice())) {
-                    deviceArrayList.add(result.getDevice());
-                    genericListAdapter.notifyDataSetChanged();
-                }
+            public void onClick(View v) {
+                getDeviceInformation();
             }
-
-            @Override
-            public void onScanFailed(int errorCode) {
-                super.onScanFailed(errorCode);
-            }
-        };
-
-
-        bluetoothAdapter.getBluetoothLeScanner().startScan(leDeviceScanCallback);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                bluetoothAdapter.getBluetoothLeScanner().stopScan(leDeviceScanCallback);
-                searchProgress.dismiss();
-            }
-        }, 10000);
+        });
     }
 
 
