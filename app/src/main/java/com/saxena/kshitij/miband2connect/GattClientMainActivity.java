@@ -1,6 +1,7 @@
 package com.saxena.kshitij.miband2connect;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -12,26 +13,30 @@ import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.BlurMaskFilter;
-import android.graphics.Region;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.crypto.Cipher;
@@ -47,12 +52,16 @@ public class GattClientMainActivity extends AppCompatActivity {
     private BluetoothGatt bluetoothGatt;
     private BluetoothGattService variableService;
     private final Object object = new Object();
-    private String TAG = "TAG";
+    private SharedPreferences sharedPreferences;
+    private Map<UUID, String> deviceInfoMap;
+    private TextView heartRate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        deviceInfoMap = new HashMap<>();
+        heartRate = (TextView) findViewById(R.id.heartRate);
         initialiseViewsAndComponents();
         getPermissions();
         enableBTAndDiscover();
@@ -68,10 +77,11 @@ public class GattClientMainActivity extends AppCompatActivity {
     /*------Methods to deal with the received data*/
     private void handleDeviceInfo(BluetoothGattCharacteristic characteristic) {
         String value = characteristic.getStringValue(0);
-        Log.d("TAG", "onCharacteristicRead: " + value + " UUID " + characteristic.getUuid().toString());
+        // Log.d("TAG", "onCharacteristicRead: " + value + " UUID " + characteristic.getUuid().toString());
         synchronized (object) {
             object.notify();
         }
+        deviceInfoMap.put(characteristic.getUuid(), value);
     }
 
     private void handleGenericAccess(BluetoothGattCharacteristic characteristic) {
@@ -107,8 +117,16 @@ public class GattClientMainActivity extends AppCompatActivity {
     }
 
 
-    private void handleHeartRateData(BluetoothGattCharacteristic characteristic) {
-        Log.d(TAG, "Heart Rate is " + characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 0).toString());
+    private void handleHeartRateData(final BluetoothGattCharacteristic characteristic) {
+
+        Log.e("Heart",characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 0).toString());
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                heartRate.setText(characteristic.getIntValue(BluetoothGattCharacteristic.FORMAT_UINT8, 0).toString());
+            }
+        });
+
     }
 
 
@@ -169,11 +187,9 @@ public class GattClientMainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
-    private void genericAccessInfo() {
+    private void getGenericAccessInfo() {
         variableService = bluetoothGatt.getService(UUIDs.GENERIC_ACCESS_SERVICE);
         try {
             for (BluetoothGattCharacteristic characteristic : variableService.getCharacteristics()) {
@@ -182,6 +198,7 @@ public class GattClientMainActivity extends AppCompatActivity {
                 synchronized (object) {
                     object.wait(2000);
                 }
+                deviceInfoMap.put(characteristic.getUuid(), characteristic.getStringValue(0));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -327,6 +344,7 @@ public class GattClientMainActivity extends AppCompatActivity {
         deviceListView = (ListView) findViewById(R.id.deviceListView);
         Button getBandDetails = (Button) findViewById(R.id.getBandDetails);
 
+        sharedPreferences = getSharedPreferences("MiBandConnectPreferences", Context.MODE_PRIVATE);
         miBandGattCallBack = new BluetoothGattCallback() {
             @Override
             public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
@@ -346,7 +364,14 @@ public class GattClientMainActivity extends AppCompatActivity {
 
             @Override
             public void onServicesDiscovered(BluetoothGatt gatt, int status) {
-                authoriseMiBand();
+
+                if (!sharedPreferences.getBoolean("isAuthenticated", false)) {
+                    authoriseMiBand();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("isAuthenticated", true);
+                    editor.apply();
+                } else
+                    Log.i("Device", "Already authenticated");
             }
 
             @Override
@@ -365,7 +390,7 @@ public class GattClientMainActivity extends AppCompatActivity {
                     case UUIDs.ALERT_NOTIFICATION_SERVICE_STRING:
                         handleAlertNotification(characteristic);
                         break;
-                        case UUIDs.IMMEDIATE_ALERT_SERVICE_STRING:
+                    case UUIDs.IMMEDIATE_ALERT_SERVICE_STRING:
                         handleImmediateAlert(characteristic);
                         break;
                 }
@@ -410,7 +435,43 @@ public class GattClientMainActivity extends AppCompatActivity {
         getBandDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextView serialNo, hardwareRev, softwareRev, deviceName;
+                Button cancel;
+
                 getDeviceInformation();
+                getGenericAccessInfo();
+                //temporary calls
+                getHeartRate();
+
+                final Dialog deviceInfoDialog = new Dialog(GattClientMainActivity.this);
+                deviceInfoDialog.setContentView(R.layout.device_info);
+                deviceInfoDialog.setCancelable(false);
+                deviceInfoDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        deviceInfoMap.clear();
+                    }
+                });
+
+                deviceName = (TextView) deviceInfoDialog.findViewById(R.id.deviceName);
+                serialNo = (TextView) deviceInfoDialog.findViewById(R.id.serialNumber);
+                hardwareRev = (TextView) deviceInfoDialog.findViewById(R.id.hardwareRevision);
+                softwareRev = (TextView) deviceInfoDialog.findViewById(R.id.softwareRevision);
+                cancel = (Button) deviceInfoDialog.findViewById(R.id.cancel_action);
+
+                deviceName.setText(deviceInfoMap.get(UUIDs.DEVICE_NAME_CHARACTERISTIC));
+                serialNo.setText(deviceInfoMap.get(UUIDs.SERIAL_NUMBER));
+                hardwareRev.setText(deviceInfoMap.get(UUIDs.HARDWARE_REVISION_STRING));
+                softwareRev.setText(deviceInfoMap.get(UUIDs.SOFTWARE_REVISION_STRING));
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        deviceInfoDialog.dismiss();
+                    }
+                });
+
+                deviceInfoDialog.show();
             }
         });
     }

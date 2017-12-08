@@ -9,13 +9,40 @@
     <ListView
         android:id="@+id/deviceListView"
         android:layout_width="match_parent"
-        android:layout_marginTop="50dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp" />
 
-    <Button
-        android:id="@+id/getBandDetails"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="Get Device Details" />
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:id="@+id/hRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/heart_rate" />
+
+            <TextView
+                android:id="@+id/heartRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/getBandDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hRate"
+            android:text="Get Device Details" />
+    </RelativeLayout>
 </RelativeLayout>
