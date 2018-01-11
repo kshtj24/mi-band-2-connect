@@ -7,3 +7,5 @@ This basic android application explains the steps to
 3. Authenticate Mi Band 2
 4. Fetch and display Device information data
 5. Enable notifications for Heart rate, Battery Status etc
+
+P.S Any contributions in the Application are welcome.
