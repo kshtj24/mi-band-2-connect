@@ -1,0 +1,161 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:2:1-28:12
+MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\78bf0a7201b0cec04db9a76d9d833ea9\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\6947a841a265e133e6cfdbada3b0d52b\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\10a25212e9659a8f158bc33b2342271a\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\3005edee16b6d42065a5e70caae33b11\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-v4:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-v4-25.4.0.aar\cad09987abe8c71f23b05b8f8f6fdd8d\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-fragment:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-fragment-25.4.0.aar\a735ba7a35ed2304fd36ae4b2d3611af\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-media-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.4.0.aar\d3f21959ba68694a5ce3075badd214bd\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-utils:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.4.0.aar\df871ed37fe60200fd2fb9f0d4f9caee\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-core-ui:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.4.0.aar\46b1c3a5526101ed8ce3fde57fd05e35\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-compat-25.4.0.aar\05a3bcdab38e3fe0f2bb0d3056ce5933\AndroidManifest.xml:17:1-31:12
+INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:2:1-28:12
+	package
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:3:5-48
+		INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:2:1-28:12
+		INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:2:1-28:12
+		INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:2:11-69
+uses-feature#android.hardware.bluetooth
+ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:5:5-63
+	android:name
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:5:19-60
+uses-feature#android.hardware.bluetooth_le
+ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:6:5-89
+	android:required
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:6:64-87
+	android:name
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:6:19-63
+uses-permission#android.permission.BLUETOOTH
+ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:8:5-68
+	android:name
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:8:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:9:5-73
+	android:name
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:9:22-71
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:10:5-81
+	android:name
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:10:22-78
+application
+ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:12:5-26:19
+MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\78bf0a7201b0cec04db9a76d9d833ea9\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\78bf0a7201b0cec04db9a76d9d833ea9\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\6947a841a265e133e6cfdbada3b0d52b\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\6947a841a265e133e6cfdbada3b0d52b\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\10a25212e9659a8f158bc33b2342271a\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\10a25212e9659a8f158bc33b2342271a\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\3005edee16b6d42065a5e70caae33b11\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\3005edee16b6d42065a5e70caae33b11\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-v4:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-v4-25.4.0.aar\cad09987abe8c71f23b05b8f8f6fdd8d\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-v4:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-v4-25.4.0.aar\cad09987abe8c71f23b05b8f8f6fdd8d\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-fragment-25.4.0.aar\a735ba7a35ed2304fd36ae4b2d3611af\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-fragment-25.4.0.aar\a735ba7a35ed2304fd36ae4b2d3611af\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.4.0.aar\d3f21959ba68694a5ce3075badd214bd\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.4.0.aar\d3f21959ba68694a5ce3075badd214bd\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.4.0.aar\df871ed37fe60200fd2fb9f0d4f9caee\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.4.0.aar\df871ed37fe60200fd2fb9f0d4f9caee\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.4.0.aar\46b1c3a5526101ed8ce3fde57fd05e35\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.4.0.aar\46b1c3a5526101ed8ce3fde57fd05e35\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-compat-25.4.0.aar\05a3bcdab38e3fe0f2bb0d3056ce5933\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-compat-25.4.0.aar\05a3bcdab38e3fe0f2bb0d3056ce5933\AndroidManifest.xml:25:5-29:19
+	android:supportsRtl
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:17:9-35
+	android:label
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:15:9-41
+	android:roundIcon
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:16:9-54
+	android:icon
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:14:9-43
+	android:allowBackup
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:13:9-35
+	android:theme
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:18:9-40
+activity#com.saxena.kshitij.miband2connect.GattClientMainActivity
+ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:19:9-25:20
+	android:name
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:19:19-57
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:20:13-24:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:21:17-69
+	android:name
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:21:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:23:17-77
+	android:name
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml:23:27-74
+uses-sdk
+INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\78bf0a7201b0cec04db9a76d9d833ea9\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\78bf0a7201b0cec04db9a76d9d833ea9\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\6947a841a265e133e6cfdbada3b0d52b\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\6947a841a265e133e6cfdbada3b0d52b\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\10a25212e9659a8f158bc33b2342271a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\10a25212e9659a8f158bc33b2342271a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\3005edee16b6d42065a5e70caae33b11\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\3005edee16b6d42065a5e70caae33b11\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-v4-25.4.0.aar\cad09987abe8c71f23b05b8f8f6fdd8d\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-v4:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-v4-25.4.0.aar\cad09987abe8c71f23b05b8f8f6fdd8d\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-fragment-25.4.0.aar\a735ba7a35ed2304fd36ae4b2d3611af\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-fragment:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-fragment-25.4.0.aar\a735ba7a35ed2304fd36ae4b2d3611af\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.4.0.aar\d3f21959ba68694a5ce3075badd214bd\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-media-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.4.0.aar\d3f21959ba68694a5ce3075badd214bd\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-utils:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.4.0.aar\df871ed37fe60200fd2fb9f0d4f9caee\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.4.0.aar\df871ed37fe60200fd2fb9f0d4f9caee\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-ui:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.4.0.aar\46b1c3a5526101ed8ce3fde57fd05e35\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-ui:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.4.0.aar\46b1c3a5526101ed8ce3fde57fd05e35\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-compat-25.4.0.aar\05a3bcdab38e3fe0f2bb0d3056ce5933\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-compat-25.4.0.aar\05a3bcdab38e3fe0f2bb0d3056ce5933\AndroidManifest.xml:21:5-23:58
+INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\78bf0a7201b0cec04db9a76d9d833ea9\AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Kshitij.a.Saxena\Desktop\mi-band-2-connect\app\src\main\AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\78bf0a7201b0cec04db9a76d9d833ea9\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\10a25212e9659a8f158bc33b2342271a\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\10a25212e9659a8f158bc33b2342271a\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\3005edee16b6d42065a5e70caae33b11\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\3005edee16b6d42065a5e70caae33b11\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-v4:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-v4-25.4.0.aar\cad09987abe8c71f23b05b8f8f6fdd8d\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-v4:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-v4-25.4.0.aar\cad09987abe8c71f23b05b8f8f6fdd8d\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-fragment-25.4.0.aar\a735ba7a35ed2304fd36ae4b2d3611af\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-fragment-25.4.0.aar\a735ba7a35ed2304fd36ae4b2d3611af\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.4.0.aar\d3f21959ba68694a5ce3075badd214bd\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.4.0.aar\d3f21959ba68694a5ce3075badd214bd\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.4.0.aar\df871ed37fe60200fd2fb9f0d4f9caee\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.4.0.aar\df871ed37fe60200fd2fb9f0d4f9caee\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.4.0.aar\46b1c3a5526101ed8ce3fde57fd05e35\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.4.0.aar\46b1c3a5526101ed8ce3fde57fd05e35\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-compat-25.4.0.aar\05a3bcdab38e3fe0f2bb0d3056ce5933\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\support-compat-25.4.0.aar\05a3bcdab38e3fe0f2bb0d3056ce5933\AndroidManifest.xml:26:9-28:38
+	android:value
+		ADDED from [com.android.support:appcompat-v7:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\78bf0a7201b0cec04db9a76d9d833ea9\AndroidManifest.xml:28:13-35
+	android:name
+		ADDED from [com.android.support:appcompat-v7:25.4.0] C:\Users\Kshitij.a.Saxena\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\78bf0a7201b0cec04db9a76d9d833ea9\AndroidManifest.xml:27:13-51
